@@ -34,14 +34,7 @@
                 id="kalia-sprite">
 
         </div>
-        <div class="Jesschair" id="jessica-chair">
-            <img src="{{ url_for('static', filename='img/jess.png') }}" alt="jessica Chair" class="chair"
-                id="jessica-sprite">
-        </div>
-        <div class="scottchair" id="scott-chair">
-            <img src="{{ url_for('static', filename='img/scott.png') }}" alt="scott Chair" class="chair"
-                id="scott-sprite">
-        </div>
+
 
         <p id="revealStatus" class="text-center  fs-5"></p>
 
@@ -62,10 +55,38 @@
                         <div class="mb-3 w-100">
                             <h5 class="mb-3">Welcome! Please remind me your name, you need to get ready for the big
                                 reveal!</h5>
-                            <form id="nameForm" action="/enter" method="POST">
-                                <input type="text" name="name" id="nameInput" class="form-control form-control-lg"
+                            <div class="input-group input-group-lg rounded border border-warning shadow-sm">
+                                <input type="text" id="nameInput" class="form-control border-0"
                                     placeholder="Enter your name..." required>
-                            </form>
+                                <button class="btn btn-butler text-white px-4"
+                                    onclick="processNameInput()">Submit</button>
+                            </div>
+
+
+                            <script>
+                                function processNameInput() {
+                                    const input = document.getElementById("nameInput");
+                                    const cleanedName = input.value.replace(/\s+/g, '').toLowerCase();
+
+                                    if (cleanedName === "") return;
+
+                                    fetch("/enter", {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/x-www-form-urlencoded"
+                                        },
+                                        body: `name=${encodeURIComponent(cleanedName)}`
+                                    }).then(response => {
+                                        if (response.redirected) {
+                                            window.location.href = response.url;
+                                        }
+                                    });
+
+                                    input.value = "";
+                                }
+                            </script>
+
+
                         </div>
 
                         <!-- Right side: Butler Image -->

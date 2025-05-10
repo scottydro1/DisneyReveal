@@ -72,17 +72,17 @@ body {
 
 /* Example placements */
 #kayce-chair {
-    right: 13%;
+    right: 30%;
     bottom: 40.3%;
 }
 
 #kinsley-chair {
-    right: -6%;
+    right: 12%;
     bottom: 39.6%;
 }
 
 #kalia-chair {
-    right: 32%;
+    right: 50%;
     bottom: 41.1%;
 }
 
@@ -248,4 +248,12 @@ body {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
     background: linear-gradient(to bottom right, #5e4835, #3a2f25);
     color: #fff2c7;
+}
+
+.btn-butler {
+    background-color: #1a73e8;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    font-weight: 600;
+    font-family: 'Georgia', serif;
 }
