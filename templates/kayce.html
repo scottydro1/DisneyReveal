@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kayce's Crafting Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/kayce.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+</head>
+
+<body class="minecraft-text bodyday">
+    <div class="banner text-center d-flex justify-content-center p-0">
+        <p class="w-75 p-0">
+            To prepare for the reveal you need to make a dress. Open the recipe book to see what
+            you need.
+        </p>
+    </div>
+    <button type="button" id="openbookbtnb" style="background-color: #F4DFB6; ;" class="btn btn-sm center-float"
+        data-bs-toggle="modal" data-bs-target="#recipeBookModal">
+        📖 Recipe Book
+        <span id="recipeBadge"
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
+            !
+        </span>
+    </button>
+    <img src="/static/img/kay.png" id="kayce" class="floating-item clickable d-none"
+        style="top: 50%; left:25% ;width: 200px;">
+
+    <img src="/static/img/dress.png" id="dress" class="floating-item clickable d-none"
+        style="top: 50%; left:25% ;width: 200px;">
+    <div id="gameArea">
+
+
+
+
+        <img src="/static/img/flower.png" id="flower" class="floating-item clickable d-none"
+            style="top: 400px; left: 170px;">
+
+        <img src="/static/img/seeds.png" id="seeds" class="floating-item clickable" style="top: 400px; left: 160px;">
+
+        <img src="/static/img/dirt.png" id="dirt" class="floating-item clickable" style="top: 550px; right: 80px;">
+
+        <!-- Web -->
+        <img src="/static/img/water.png" id="water" class="floating-item clickable" style="top: 80px; left: 260px;">
+
+        <img src="/static/img/tree.png" class="floating-item tree"
+            style="top: 200px; left: 200px; width: auto; height: 200px;">
+
+
+        <img src="/static/img/spider.png" class="floating-item d-none" id="spider"
+            style="top: 200px; left: 240px; width: auto; height: 100px;">
+
+
+        <img src="/static/img/tree.png" class="floating-item tree"
+            style="top: 240px; left: -50px; width: auto; height: 140px;">
+
+        <img src="/static/img/grass.png" class="floating-item grass nonclick"
+            style="top: 380px; left: 200px; width: 50px; height: 50px;">
+
+        <img src="/static/img/grass.png" class="floating-item grass nonclick"
+            style="top: 380px; left: 180px; width: 80px; height: 80px;">
+
+        <img src="/static/img/rock.png" class="floating-item rock nonclick"
+            style="top: 500px; right: 30px; width: 120px; height: auto;">
+
+        <img src="/static/img/rock.png" class="floating-item rock nonclick"
+            style="top: 550px; right: 60px; width: 80px; height: auto;">
+
+
+
+        <img src="/static/img/grass.png" class="floating-item nonclick grass"
+            style="top: 490px; left: 58px; width: 50px; height: 50px;">
+
+        <img src="/static/img/grass.png" class="floating-item nonclick grass"
+            style="top: 570px; left: 300px; width: 50px; height: 50px;">
+
+        <img src="/static/img/cloud.png" class="floating-item nonclick "
+            style="top:50px; left: 10px; width: 100px; height: auto;">
+        <img src="/static/img/cloud.png" class="floating-item nonclick cloud"
+            style="top: 30px; right: 50px; width: 120px; height: auto;">
+
+        <img src="/static/img/sun.png" id="sun" class="floating-item clickable"
+            style="top:10px; left: 10px; width: 100px; height: auto;">
+
+
+        <!-- Tree -->
+
+        <!-- Web -->
+
+        <!-- Flower -->
+
+
+    </div>
+
+    <div class="modal fade" id="recipeBookModal" tabindex="-1" aria-labelledby="recipeBookLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header minecraft-text bg-dark">
+                    <h1 class="modal-title text-warning " id="recipeBookLabel">Recipe Book</h1>
+                    <button type="button" class="btn-close btn-close-white text-light" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body minecraft-text">
+                    <div id="recipePages">
+                        <!-- Page 1: Flower -->
+                        <div id="page1" class="recipe-page">
+                            <p class=" fs-2 mb-0 ">Teal Flower</p>
+                            <div class="row">
+                                <p>Ingredients:</p>
+                                <div class="col-4 d-flex align-items-center justify-content-center">
+                                    <img id="seednull" src="/static/img/seednull.png"
+                                        style="width: 50px; height: 50px;"> +
+                                </div>
+                                <div class="col-4 d-flex align-items-center justify-content-center">
+                                    <img id="dirtnull" src="/static/img/dirtnull.png"
+                                        style="width: 50px; height: 50px;"> +
+                                </div>
+                                <div class="col-4 d-flex align-items-center justify-content-center">
+                                    <img id="waternull" src="/static/img/waternull.png"
+                                        style="width: 50px; height: 50px;"> +
+                                </div>
+                            </div>
+                            <button id="craftFlower" disabled class="btn btn-success">Grow Flower</button>
+                        </div>
+
+                        <!-- Page 2: Loom -->
+                        <div id="page2" class="recipe-page d-none">
+                            <p class=" fs-2 mb-0 ">Build Dress</p>
+                            <div class="row">
+                                <p>Ingredients:</p>
+                                <div class="col-6 d-flex align-items-center justify-content-center">
+                                    <img id="flowernull" src="/static/img/flowernull.png"
+                                        style="width: 50px; height: 50px;"> +
+                                </div>
+                                <div class="col-6 d-flex align-items-center justify-content-center">
+                                    <img id="webnull" src="/static/img/webnull.png" style="width: 50px; height: 50px;">
+                                    +
+                                </div>
+
+                            </div>
+                            <button id="craftDress" disabled class="btn btn-success">Build Dress</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/kayce.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+</html>

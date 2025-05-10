@@ -1,0 +1,101 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    min-height: 100vh;
+    background-color: #fbeee0;
+    font-family: 'Minecraft', monospace;
+}
+
+/* Hallway image scales naturally */
+.hall-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.bedroom-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.hall-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Example float styling for ingredient list */
+.ingredient-list .btn {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.banner {
+    background: linear-gradient(90deg, #ffe8b3, #fff4d9);
+    padding: 15px 20px;
+    border-bottom: 3px solid #e2c275;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #5a3e00;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+}
+
+/* Floating items for the game area */
+.floating-item {
+    position: absolute;
+    width: 80px;
+    height: auto;
+    cursor: pointer;
+}
+
+@font-face {
+    font-family: 'Star';
+    src: url('/static/fonts/star.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.minecraft-text {
+    font-family: 'Star', monospace;
+    letter-spacing: 0.5px;
+}
+
+
+
+@keyframes popFade {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    20% {
+        transform: scale(1.25);
+    }
+
+    40% {
+        transform: scale(0.95);
+    }
+
+    60% {
+        transform: scale(1.05);
+    }
+
+    80% {
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.pop-fade {
+    animation: popFade 3s ease-in-out forwards;
+    z-index: 999;
+    position: absolute;
+}

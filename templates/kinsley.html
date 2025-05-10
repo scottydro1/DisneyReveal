@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kinsley's Search Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Kinsley.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: auto;
+            min-height: 100vh;
+        }
+
+
+        .hall-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .hall-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .floating-item {
+            position: absolute;
+            width: 80px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body class="minecraft-text">
+    <div class="container-fluid">
+
+        <button type="button" id="hallway_btn" class="btn btn-sm position-absolute text-light d-none"
+            style="background-color: #FFAD60; top: 12%; left: 5%; z-index: 999;">
+            <img src="/static/img/kins/back.png" class="btn btn-sm  text-light" style=" height: 25px; width: auto;" />
+            Hallway</button>
+
+
+        <div class="banner text-center d-flex justify-content-center p-0">
+            <p class="w-75 p-0">
+                OMG!!! You are going to miss the Big Reveal! Hurry and grab everything you need!
+            </p>
+        </div>
+
+
+        <div id="hall_room" class="hall-wrapper ">
+            <img src="/static/img/kins/hallway.png" class="hall-image" alt="Hallway background">
+
+            <button type="button" id="trophyroom_btn" class="btn btn-sm position-absolute text-light"
+                style="background-color: #E06469; top: 50%; left: 5%;">Trophy Room</button>
+            <img src="/static/img/kins/lock.png" id="trophyroom_lock" class="position-absolute text-light"
+                style=" top: 40%; left: 8%; height: 50px; width: auto;" />
+
+            <button type="button" id="bathroom_btn" class="btn btn-sm position-absolute text-light"
+                style="background-color: #E06469; top: 60%; left: 80%;">Bathroom</button>
+            <img src="/static/img/kins/lock.png" id="bathroom_lock" class="position-absolute text-light"
+                style=" top: 50%; left: 85%; height: 50px; width: auto;" />
+
+            <button type="button" id="bedroom_btn" class="btn btn-sm position-absolute text-light"
+                style="background-color: #E06469; top: 30%; left: 40%;">Bedroom</button>
+            <img src="/static/img/kins/lock.png" id="bedroom_lock" class="position-absolute text-light d-none"
+                style=" top: 22%; left: 42%; height: 50px; width: auto;" />
+
+            <img src="/static/img/kins/markerdimer.png" id="trophykey" class="floating-item clickable d-none"
+                style="top:80%; left:40%;">
+
+        </div>
+        <div id="bathroom_room" class="bathroom_room-wrapper d-none">
+            <img src="/static/img/kins/bathroom.png" class="hall-image" alt="Hallway background">
+
+            <img src="/static/img/kins/marker.png" id="lipgloss" class="floating-item clickable"
+                style="top: 18%; left: 8%;">
+
+            <img src="/static/img/kins/marker.png" id="shower" class="floating-item clickable"
+                style="top:30%; right: 10%;">
+
+
+        </div>
+        <div id="trophy_room" class="trophy-wrapper d-none">
+            <img src="/static/img/kins/trophyroom.png" class="hall-image" alt="Hallway background">
+
+            <img src="/static/img/kins/markerdimer.png" id="crown" class="floating-item clickable"
+                style="top: 38%; left: 35%;">
+
+            <img src="/static/img/kins.png" id="kinsley" class="floating-item d-none"
+                style="top: 38%; left: 60%; width: 150px;height: auto;">
+
+
+
+        </div>
+
+        <div id="bedroom_room" class="bedroom-wrapper d-none">
+            <img src="/static/img/kins/bedroom.png" class="hall-image" alt="Hallway background">
+
+            <img src="/static/img/kins/marker.png" id="teddy" class="floating-item clickable"
+                style="top: 38%; right: 10%;">
+
+            <img src="/static/img/kins/marker.png" id="dress" class="floating-item clickable"
+                style="top:20%; right: 3%;">
+
+            <img src="/static/img/kins/marker.png" id="slippers" class="floating-item clickable"
+                style="top:45%; left:30%;">
+
+            <img src="/static/img/kins/marker.png" id="bathkey" class="floating-item clickable"
+                style="top:38%; left:0%;">
+        </div>
+
+        <div class="container text-center mt-4">
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <button id="inv_bathkey" class="btn btn-outline-secondary disabled">Bathroom Key</button>
+                <button id="inv_trophykey" class="btn btn-outline-secondary disabled">TrophyRoom Key</button>
+                <button id="inv_lipgloss" class="btn btn-outline-secondary disabled">Lip Gloss</button>
+                <button id="inv_dress" class="btn btn-outline-secondary disabled">Dress</button>
+                <button id="inv_slippers" class="btn btn-outline-secondary disabled">Slippers</button>
+                <button id="inv_teddy" class="btn btn-outline-secondary disabled">Teddy Bear</button>
+                <button id="inv_shower" class="btn btn-outline-secondary disabled">Take Shower</button>
+                <button id="inv_crown" class="btn btn-outline-secondary disabled">Crown</button>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/kinsley.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+</html>

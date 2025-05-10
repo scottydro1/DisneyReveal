@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Disney Reveal Landing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="ballroom">
+        <!-- Kayce's Chair -->
+        <div class="kaycechair" id="kayce-chair">
+            <img src="{{ url_for('static', filename='img/pinkchair.png') }}" alt="Kayce Chair" class="chair"
+                id="kayce-sprite">
+
+        </div>
+
+        <!-- Kinsley's Chair -->
+        <div class="kinsleychair" id="kinsley-chair">
+            <img src="{{ url_for('static', filename='img/pinkchair.png') }}" alt="Kinsley Chair" class="chair"
+                id="kinsley-sprite">
+        </div>
+        <!-- kalia's Chair -->
+        <div class="kaliachair" id="kalia-chair">
+            <img src="{{ url_for('static', filename='img/pinkchair.png') }}" alt="kalia Chair" class="chair"
+                id="kalia-sprite">
+
+        </div>
+        <div class="Jesschair" id="jessica-chair">
+            <img src="{{ url_for('static', filename='img/jess.png') }}" alt="jessica Chair" class="chair"
+                id="jessica-sprite">
+        </div>
+        <div class="scottchair" id="scott-chair">
+            <img src="{{ url_for('static', filename='img/scott.png') }}" alt="scott Chair" class="chair"
+                id="scott-sprite">
+        </div>
+
+        <p id="revealStatus" class="text-center  fs-5"></p>
+
+        <!-- Butler Trigger Button -->
+        <button class="btn btn-butler btn-lg position-fixed bottom-0 start-50 translate-middle-x mb-5 text-light"
+            data-bs-toggle="modal" data-bs-target="#butlerModal">
+            Hello madam.
+        </button>
+
+        <!-- Butler Modal -->
+        <div class="modal fade" id="butlerModal" tabindex="-1" aria-labelledby="butlerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+
+                    <div
+                        class="modal-body d-flex flex-column flex-md-row align-items-center justify-content-between p-4">
+                        <!-- Left side: text + input -->
+                        <div class="mb-3 w-100">
+                            <h5 class="mb-3">Welcome! Please remind me your name, you need to get ready for the big
+                                reveal!</h5>
+                            <form id="nameForm" action="/enter" method="POST">
+                                <input type="text" name="name" id="nameInput" class="form-control form-control-lg"
+                                    placeholder="Enter your name..." required>
+                            </form>
+                        </div>
+
+                        <!-- Right side: Butler Image -->
+                        <div class="text-center">
+                            <img src="/static/img/butler.png" alt="Butler" class="img-fluid" style="max-height: 300px;">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- More chairs... -->
+    </div>
+
+
+    <script>
+        // Auto-submit the form when Enter is pressed in the input
+        document.getElementById('nameInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('nameForm').submit();
+            }
+        });
+    </script>
+    <style>
+        .disney-message {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.2rem;
+            color: #ff3e96;
+            text-align: center;
+            margin-top: 20px;
+            animation: sparkle 1.5s infinite alternate;
+        }
+
+        @keyframes sparkle {
+            0% {
+                text-shadow: 0 0 5px #ff6ec7;
+            }
+
+            100% {
+                text-shadow: 0 0 20px #ff6ec7, 0 0 30px #ff3e96;
+            }
+        }
+    </style>
+
+    <script>
+        const userProgress = {{ progress | tojson | safe }};
+        const revealStatus = document.getElementById("revealStatus");
+
+        const readyNames = Object.keys(userProgress)
+            .filter(name => userProgress[name])
+            .map(name => name.charAt(0).toUpperCase() + name.slice(1));
+
+        if (readyNames.length === 0) {
+            revealStatus.textContent = "Oh no, none of the kids are ready for the big reveal!";
+        } else if (readyNames.length === Object.keys(userProgress).length) {
+            revealStatus.innerHTML = `
+  <div class="disney-message">
+    We’re going to Disney World on the 30th!!
+    <br>
+    <img src="/static/img/kins/mickey.png" alt="Mouse Icon" style="height: 40px; margin: 5px;">
+    <img src="/static/img/kins/road.png" alt="Mouse Icon" style="height: 40px; margin: 5px;">
+    <img src="/static/img/kins/disneyland.png" alt="Mouse Icon" style="height: 40px; margin: 5px;">
+  </div>
+`;
+        } else if (readyNames.length === 1) {
+            revealStatus.textContent = `Hmmm... only ${readyNames[0]} is ready for the big reveal.`;
+        } else {
+            const last = readyNames.pop();
+            revealStatus.textContent = `Hmm... only ${readyNames.join(", ")} and ${last} are ready for the big reveal.`;
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+</html>

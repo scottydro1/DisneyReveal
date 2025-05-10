@@ -1,0 +1,251 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: sans-serif;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
+}
+
+#revealStatus {
+    background: #f3e5ab;
+    border: 2px solid #d4af37;
+    border-radius: 12px;
+    padding: 15px 20px;
+    max-width: 600px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #3e2f1c;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+
+.ballroom {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("/static/img/ballroom.png");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Positioning each chair individually */
+.chair {
+    position: absolute;
+    width: 250px;
+    height: 120px;
+}
+
+.Jesschair {
+    position: absolute;
+    width: 100px;
+    height: 120px;
+}
+
+.scottchair {
+    position: absolute;
+    width: 100px;
+    height: 120px;
+}
+
+.kaliachair {
+    position: absolute;
+    width: 100px;
+    height: 120px;
+}
+
+.kaycechair {
+    position: absolute;
+    width: 100px;
+    height: 120px;
+}
+
+.kinsleychair {
+    position: absolute;
+    width: 100px;
+    height: 120px;
+}
+
+/* Example placements */
+#kayce-chair {
+    right: 13%;
+    bottom: 40.3%;
+}
+
+#kinsley-chair {
+    right: -6%;
+    bottom: 39.6%;
+}
+
+#kalia-chair {
+    right: 32%;
+    bottom: 41.1%;
+}
+
+#scott-chair {
+    right: 73%;
+    bottom: 40.9%;
+}
+
+#jessica-chair {
+    right: 51%;
+    bottom: 41.8%;
+}
+
+/* Add more positioning for other chairs as needed */
+
+.kaliachair .chair {
+    width: 80%;
+    height: auto;
+    z-index: 12;
+
+}
+
+.kaycechair .chair {
+    width: 75%;
+    height: auto;
+}
+
+.kinsleychair .chair {
+    width: 70%;
+    height: auto;
+}
+
+.Jesschair .chair {
+    width: 85%;
+    height: auto;
+}
+
+.scottchair .chair {
+    width: 92%;
+    height: auto;
+}
+
+/* the person sitting in the chair image */
+
+.kaliachair .done {
+    width: 100%;
+    height: auto;
+    z-index: 10;
+}
+
+.kaycechair .done {
+    bottom: 50%;
+    width: 90%;
+    height: auto;
+}
+
+.kinsleychair .done {
+    width: 90%;
+    height: auto;
+}
+
+.Jesschair .done {
+    width: 105%;
+    height: auto;
+}
+
+.scottchair .done {
+    width: 112%;
+    height: auto;
+}
+
+/* DSFAAAAAA */
+
+.Jessdone {
+    position: absolute;
+    width: 250px;
+    height: 120px;
+}
+
+.scottdone {
+    position: absolute;
+    width: 250px;
+    height: 120px;
+}
+
+.kaliadone {
+    position: absolute;
+    width: 250px;
+    height: 120px;
+}
+
+.kaycedone {
+    position: absolute;
+    width: 250px;
+    height: 120px;
+}
+
+.kinsleydone {
+    position: absolute;
+    width: 250px;
+    height: 120px;
+}
+
+.modal-content {
+    background: linear-gradient(to bottom right, #fffaf0, #f4f0e6);
+    border: 3px solid #d4af37;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    font-family: 'Playfair Display', serif;
+}
+
+.modal-header {
+    background-color: #2e2a25;
+    border-bottom: 2px solid #d4af37;
+}
+
+.modal-title {
+    color: #f9eecf;
+    font-weight: 700;
+}
+
+.btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.modal-body h5 {
+    color: #3e2f1c;
+    font-weight: 600;
+}
+
+#nameInput {
+    border: 2px solid #d4af37;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1.1rem;
+}
+
+#nameInput::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+.modal-body img {
+    border: 2px solid #d4af37;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.btn-butler {
+    background: linear-gradient(to bottom right, #4b3b2a, #2e261d);
+    color: #f9eecf;
+    border: 2px solid #d4af37;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    padding: 12px 24px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-butler:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to bottom right, #5e4835, #3a2f25);
+    color: #fff2c7;
+}

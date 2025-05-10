@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kinsley's Search Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/kalia.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <!-- Add this to your <head> -->
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: auto;
+            min-height: 100vh;
+        }
+
+
+        .hall-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .hall-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .floating-item {
+            position: absolute;
+            width: 80px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body class="minecraft-text" style="background-color: #3D90D7;">
+    <div class="container-fluid">
+
+
+
+        <!-- Banner -->
+        <div class="banner text-center d-flex justify-content-center align-items-center p-0">
+            <p id="taskPrompt" class="w-100 p-2 mt-2 fs-4">Who do you feel like being today at school?</p>
+        </div>
+
+
+
+        <!-- Landing Page: School Front -->
+        <div id="school_front" class="hall-wrapper">
+            <img src="/static/img/kalia/school.png" class="hall-image" alt="School Front" />
+
+            <!-- Centered Button Container -->
+            <div
+                class="button-center-wrapper position-absolute top-50 start-50 translate-middle text-center d-flex justify-content-center gap-4">
+                <button id="popularBtn" class=" btn-popular px-4 py-3 w-50 " onclick="startPopularGirlTask()">👑 Popular
+                    Girl</button>
+                <button id="mysteryBtn" class=" btn-mystery px-4 py-3 w-50" onclick="startMysteriousGirlTask()">🕶
+                    Mysterious Girl</button>
+            </div>
+        </div>
+
+
+
+        <div id="hallway" class="hallway-wrapper d-none">
+            <img src="/static/img/kalia/hallway.png" class="hall-image" alt="Hallway background">
+
+            <img src="/static/img/kalia/hayden.png" id="hayden" class="floating-item clickable d-none"
+                style="top: 40%; left: 35%;width: 200px;height: auto;">
+
+            <img src="/static/img/kalia/amiya.png" id="amiya" class="floating-item clickable d-none"
+                style="top: 35%; left: 0%;width: 200px;height: auto;">
+
+            <img src="/static/img/kalia/mean.png" id="mean" class="floating-item clickable d-none"
+                style="top: 35%; left: 30%;width: 200px;height: auto;">
+
+
+            <div id="taskTimer" class="d-none text-center fs-4 fw-bold text-danger">Time Left: <span
+                    id="timerValue">6</span><span class="fs-6">s</span></div>
+
+            <div id="wordPuzzle" class="d-none text-center mt-1">
+                <button class="word-btn btn btn-light m-2">clock</button>
+                <button class="word-btn btn btn-light m-2">nice</button>
+                <button class="word-btn btn btn-light m-2">Shivy</button>
+                <button class="word-btn btn btn-light m-2">slay</button>
+                <button class="word-btn btn btn-light m-2">haircut</button>
+
+                <!-- Add more as needed -->
+            </div>
+
+            <!-- Failure Modal -->
+            <div class="modal fade" id="failModal" tabindex="-1" aria-labelledby="failModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content text-center p-4">
+                        <h5 class="modal-title text-danger" id="failModalLabel">💅 Not Cool Enough</h5>
+                        <div class="modal-body">
+                            You fumbled the compliment! Hayden walked away... try again tomorrow, maybe.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Modal -->
+            <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content text-center p-4">
+                        <h5 class="modal-title text-success" id="successModalLabel">✨ Compliment Delivered!</h5>
+                        <div class="modal-body">
+                            Hayden smiled and said “Thanks boo!!” 😎
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Amiya Outfit Task -->
+            <div id="amiyaTask" class="d-none text-center ">
+                <div id="emojiOptions" class="d-flex justify-content-center gap-3 ">
+                    <button class="emoji-btn btn btn-outline-light fs-3">😂</button>
+                    <button class="emoji-btn btn btn-outline-light fs-3">😴</button>
+                    <button class="emoji-btn btn btn-outline-light fs-3">💖</button>
+                    <button class="emoji-btn btn btn-outline-light fs-3">🥵</button>
+                    <button class="emoji-btn btn btn-outline-light fs-3">🫣</button>
+                </div>
+                <div class="text-danger mt-2" id="amiyaTimer">Time Left: <span id="amiyaTimerVal">5</span>s</div>
+            </div>
+
+            <!-- Failure Modal for Amiya -->
+            <div class="modal fade" id="failAmiyaModal" tabindex="-1" aria-labelledby="failAmiyaLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content text-center p-4">
+                        <h5 class="modal-title text-danger" id="failAmiyaLabel">💅 Fashion Emergency</h5>
+                        <div class="modal-body">
+                            You hesitated or picked the wrong vibe. Amiya walked away saying “Haters gonna hate.”
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Modal for Amiya -->
+            <div class="modal fade" id="successAmiyaModal" tabindex="-1" aria-labelledby="successAmiyaLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content text-center p-4">
+                        <h5 class="modal-title text-success" id="successAmiyaLabel">✨ Outfit Approved</h5>
+                        <div class="modal-body">
+                            “I knewww you’d get it, sis 😘” — friendship level increased!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="meanGirlsTask" class="d-none text-center">
+
+
+                <div class="d-flex justify-content-center gap-3 ">
+                    <button class="reaction-btn btn btn-danger">Clapback 🔥</button>
+                    <button class="reaction-btn btn btn-secondary">Ignore 🙄</button>
+                    <button class="reaction-btn btn btn-warning">Laugh 😆</button>
+                </div>
+            </div>
+
+            <!-- Modal: Fail -->
+            <div class="modal fade" id="failMeanGirlsModal" tabindex="-1" aria-labelledby="failMeanGirlsLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content text-center p-4">
+                        <h5 class="modal-title text-danger" id="failMeanGirlsLabel">💔 Too Shook</h5>
+                        <div class="modal-body">
+                            Your reaction made it worse! Now they’re posting about you 😓
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal: Success -->
+            <div class="modal fade" id="successMeanGirlsModal" tabindex="-1" aria-labelledby="successMeanGirlsLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content text-center p-4">
+                        <h5 class="modal-title text-success" id="successMeanGirlsLabel">💃 Unbothered Queen</h5>
+                        <div class="modal-body">
+                            You handled it like a pro. They’re the ones looking pressed!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="hallway_mystery" class="hallway-wrapper d-none">
+            <img src="/static/img/kalia/hallway.png" class="hall-image" alt="Hallway background" />
+
+            <img src="/static/img/kalia/amiya.png" id="amiya2" class="floating-item clickable d-none"
+                style="top:30%; left: 35%; width: 200px; height: auto;">
+
+
+            <div id="mysteryOptions" class="d-none text-center">
+                <button class="mystery-btn btn btn-outline-dark m-1">“Is Pluto still a planet?”</button>
+                <button class="mystery-btn btn btn-outline-dark m-1">“Parties are... nice.”</button>
+                <button class="mystery-btn btn btn-outline-dark m-1">“Only if the moon says so.”</button>
+                <button class="mystery-btn btn btn-outline-dark m-1">“Y-yeah, I’ll float by.”</button>
+            </div>
+
+            <!-- Failure Modal -->
+            <div class="modal fade" id="failMysteryModal" tabindex="-1" aria-labelledby="failMysteryLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content text-center p-4">
+                        <h5 class="modal-title text-danger" id="failMysteryLabel">😬 Too Mysterious</h5>
+                        <div class="modal-body">
+                            Amiya blinked twice and just... walked away. That got weird fast.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Modal -->
+            <div class="modal fade" id="successMysteryModal" tabindex="-1" aria-labelledby="successMysteryLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content text-center p-4">
+                        <h5 class="modal-title text-success" id="successMysteryLabel">🪐 Social Stealth Win</h5>
+                        <div class="modal-body">
+                            “Haha okay, you’re weird — but cool weird.” You’re still in the game, mystery girl.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 2: Hayden likes gossip -->
+            <img src="/static/img/kalia/hayden.png" id="hayden2" class="floating-item clickable d-none"
+                style="top: 32%; left: 60%; width: 200px; height: auto;" />
+
+            <div id="mysteryHaydenOptions" class="d-none text-center ">
+                <button class="mystery-hayden-btn btn btn-outline-dark m-1">“I knew before they did.”</button>
+                <button class="mystery-hayden-btn btn btn-outline-dark m-1">“The universe whispers often.”</button>
+                <button class="mystery-hayden-btn btn btn-outline-dark m-1">“What’s a crush anyway?”</button>
+            </div>
+
+            <!-- Hayden Fail Modal -->
+            <div class="modal fade" id="failMysteryHaydenModal" tabindex="-1" aria-labelledby="failMysteryHaydenLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content text-center p-4">
+                        <h5 class="modal-title text-danger" id="failMysteryHaydenLabel">🙃 Confusion Vortex</h5>
+                        <div class="modal-body">
+                            Hayden looked lost... and now she's texting someone else about you 😅
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hayden Success Modal -->
+            <div class="modal fade" id="successMysteryHaydenModal" tabindex="-1"
+                aria-labelledby="successMysteryHaydenLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content text-center p-4">
+                        <h5 class="modal-title text-success" id="successMysteryHaydenLabel">🔮 Smooth Mystery</h5>
+                        <div class="modal-body">
+                            Hayden blinked... then laughed. “You're weird, but like... in a cute way.” 💫
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Mean Girls Encounter -->
+            <img src="/static/img/kalia/mean.png" id="meanMystery" class="floating-item clickable d-none"
+                style="top: 30%; left: 10%; width: 200px; height: auto;" />
+
+            <div id="mysteryMeanOptions" class="d-none text-center ">
+                <button class="mean-mystery-btn btn btn-outline-dark m-1">“That’s one opinion of many.”</button>
+                <button class="mean-mystery-btn btn btn-outline-dark m-1">“You see me in dreams, don’t you?”</button>
+
+                <button class="mean-mystery-btn btn btn-outline-dark m-1">“Oh no, anyway...”</button>
+            </div>
+
+            <!-- Modal: Fail -->
+            <div class="modal fade" id="failMysteryMeanModal" tabindex="-1" aria-labelledby="failMysteryMeanLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content text-center p-4">
+                        <h5 class="modal-title text-danger" id="failMysteryMeanLabel">😓 Too Awkward</h5>
+                        <div class="modal-body">
+                            They stared at you. You stared back. Then they laughed. Dang.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal: Success -->
+            <div class="modal fade" id="successMysteryMeanModal" tabindex="-1" aria-labelledby="successMysteryMeanLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content text-center p-4">
+                        <h5 class="modal-title text-success" id="successMysteryMeanLabel">🦉 Wise & Unshaken</h5>
+                        <div class="modal-body">
+                            They backed off. One even whispered, “She kinda scary…” You win.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="outside" class="trophy-wrapper d-none">
+            <img src="/static/img/kalia/outside.png" class="hall-image" alt="Hallway background">
+
+
+            <img src="/static/img/kal1.png" id="crown" class="floating-item clickable"
+                style="top: 46%; left: 35%;height: 200px;width: auto;">
+
+
+        </div>
+
+
+    </div>
+    <script src="{{ url_for('static', filename='js/kalia2.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/kalia.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+</html>

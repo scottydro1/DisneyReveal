@@ -1,0 +1,147 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    min-height: 100vh;
+    background-color: #fbeee0;
+}
+
+/* Hallway image scales naturally */
+.hall-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.bedroom-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.hall-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Example float styling for ingredient list */
+.ingredient-list .btn {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.banner {
+    background: linear-gradient(to right, #FAD59A, #FAD59A);
+    border-bottom: 5px solid #555;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    color: #537D5D;
+    text-transform: uppercase;
+    text-shadow: 1px 1px #fff;
+}
+
+
+/* Floating items for the game area */
+.floating-item {
+    position: absolute;
+    width: 80px;
+    height: auto;
+    cursor: pointer;
+}
+
+@font-face {
+    font-family: 'VARSITY';
+    src: url('/static/fonts/varsity.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.minecraft-text {
+    font-family: 'VARSITY', monospace;
+    letter-spacing: 0.5px;
+}
+
+
+
+@keyframes popFade {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    20% {
+        transform: scale(1.25);
+    }
+
+    40% {
+        transform: scale(0.95);
+    }
+
+    60% {
+        transform: scale(1.05);
+    }
+
+    80% {
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.pop-fade {
+    animation: popFade 3s ease-in-out forwards;
+    z-index: 999;
+    position: absolute;
+}
+
+.button-center-wrapper {
+    z-index: 10;
+}
+
+.btn-popular {
+    background-color: #ffc0cb;
+    color: #6a0d45;
+    font-weight: bold;
+    border: 2px solid #ff91af;
+    border-radius: 25px;
+
+}
+
+.btn-mystery {
+    background-color: #c1c6e0;
+    color: #2c2f63;
+    font-weight: bold;
+    border: 2px solid #9fa3d6;
+    border-radius: 25px;
+
+
+}
+
+.hallway-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.hall-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.task-box {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff8c4;
+    border: 2px solid #f4d03f;
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 1000;
+    font-family: 'VARSITY', sans-serif;
+}
